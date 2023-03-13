@@ -7,16 +7,16 @@ n=(1000 2000 3000 4000 5000 8000 10000 50000 100000 150000 200000 300000 400000 
 entrada="numeros10millones.txt"
 
 # Nombre del archivo de salida
-salida="insercion.txt"
+salida="quick.txt"
 
 # Compilar el código fuente
-gcc insercion.c tiempo.c -o insercion
+gcc quick.c tiempo.c -o quick
 
 # Ejecutar el programa para cada tamaño de entrada
 for n in "${n[@]}"
 do
     echo "Ejecutando insercion para $n elementos"
-    ./insercion $size < $entrada >> $salida
+    ./quick $size < $entrada >> $salida
 done
 
 echo "Terminado"
