@@ -1,14 +1,14 @@
 //*****************************************************************
 /*
-	ORDENAMIENTO CON UN ÁRBOL BINARIO DE BÚSQUEDA (ABB)
-	Este programa muestra el algoritmo de ordenación con un árbol binario 
-    de búsqueda para hacer la medición de tiempos con distinta cantidad 
+	HEAP SORT
+	Este programa muestra el algoritmo heap sort 
+	para hacer la medición de tiempos con distinta cantidad 
     de numeros a ordenar.
 	
-    Fecha: 23/03/2023
+    Fecha: 13/03/2023
 	Version: 1.0
 	Autores:
-			-Ojeda Navarro Guillermo
+			-Ojeda navarro Guillermo
 */
 //*****************************************************************
 
@@ -21,22 +21,13 @@
 #include "tiempo.h"
 
 //*****************************************************************
-//DEFINIENDO LA ESTRUCTURA DEL ARBOL
-//*****************************************************************
-struct Arbol{
-    int dato;
-    struct Arbol *izquierda;
-    struct Arbol *derecha;
-};
-
-//*****************************************************************
-//DECLARACIÓN DE FUNCIONES
+//DECLARACIÓN DE FUNCIOnES
 //*****************************************************************
 void llenarArreglo(int* arreglo, int n);
 void imprimirArreglo(int* arreglo, int n);
-struct Arbol *insertar(struct Arbol *nodo, int n);
-void guardarRecorridoInOrden(struct Arbol *nodo, int *arreglo);
-
+void swap(int* a, int* b);
+void acumular(int arreglo[], int n, int i);
+void heapSort(int arreglo[], int n);
 //*****************************************************************
 int aux = 0; //variable auxiliar
 //*****************************************************************
@@ -51,7 +42,7 @@ int main (int argc, char* argv[])
 	int n; 	//n determina el tamaño del algorito dado por argumento al ejecutar
 	int i, j; //Variables para loops
 	int *arreglo; //Variable donde se guardara el arreglo
-	struct Arbol *arbol = NULL; //variable que apunta a la estructura Arbol
+	struct Arbol *arbol = nULL; //variable que apunta a la estructura Arbol
 	//******************************************************************	
 	//Recepción y decodificación de argumentos
 	//******************************************************************	
@@ -82,20 +73,16 @@ int main (int argc, char* argv[])
 	//******************************************************************
 	
 	//******************************************************************	
-	//Algoritmo Ordenamiento con un árbol binario de búsqueda (ABB)
+	//Algoritmo Heap sort
 	/*
         Este algortimo requiere de dos pasos:
-        1. Insertar cada uno de los número de un arreglo en el árbol binario de búsqueda.
-        2. Reemplazar los elementos en desorden del arreglo por el arreglo resultante de un 
-            recorrido InOrden del ABB, el cual entrega los números ya ordenados.
+        1. Insertar cada uno de los número de un arreglo en el monticulo.
+        2. Remplazar el arreglo en desorden por el arreglo resultante de un 
+           ciclo extrayendo un elemento a la vez del monticulo.
     */
 	//******************************************************************	
 	
-    for(i=0; i<n; i++){
-        arbol = insertar(arbol, arreglo[i]);
-    }
-
-    guardarRecorridoInOrden(arbol,arreglo);
+    heapSort(arreglo, n);
     
     //******************************************************************
 
@@ -127,7 +114,7 @@ int main (int argc, char* argv[])
 }
 
 //************************************************************************
-//DEFINICIÓN DE FUNCIONES 
+//DEFINICIÓn DE FUNCIONES 
 //************************************************************************
 
 /*
@@ -160,34 +147,67 @@ void imprimirArreglo(int* arreglo, int n){
 
 }
 
-/*  Esta función inserta nodos en el árbol, recibe una variable que apunta a la estructura
-    Arbol y un entero, devuelve el nodo creado */
-struct Arbol *insertar(struct Arbol *nodo, int n){
-    if(nodo == NULL){ //caso base: nodo raíz
-        struct Arbol *nuevo = NULL;
-        nuevo = (struct Arbol*)malloc(sizeof(struct Arbol)); //solicita memoria
-        nuevo -> dato = n; //asigna el dato 
-        nuevo -> izquierda = NULL; //inicializa los nodos izq y der
-        nuevo -> derecha = NULL;
-        return nuevo;
-    }
+/* Función para intercambiar la posición de dos elementos */
+void swap(int* a, int* b)
+{
 
-    if(n < nodo -> dato){ //si n es menor, se guarda en el nodo izquierdo
-        nodo -> izquierda = insertar(nodo->izquierda, n);
-    } else{//si es mayor, se guarda en el nodo derecho
-        nodo -> derecha = insertar(nodo->derecha, n);
-    }
+	int temp = *a;
 
-    return nodo;
+	*a = *b;
+
+	*b = temp;
 }
 
-/*  Esta funcion realiza un recorrido ascendente en el árbol, primero recorremos a la 
-    izquierda, luego la raíz, y finalmente la derecha. Además lo va guardando en nuestro 
-    arreglo reemplazando los elementos desordenados por los elementos ya ordenados. */
-void guardarRecorridoInOrden(struct Arbol *nodo, int *arreglo){
-    if(nodo != NULL){
-        guardarRecorridoInOrden(nodo->izquierda,arreglo);
-        arreglo[aux++] = nodo->dato; 
-        guardarRecorridoInOrden(nodo->derecha,arreglo);
-    }
+/* Para acumular un subárbol enraizado con el nodo i, que es un índice en arreglo[]. 
+n es el tamaño del montón */ 
+void acumular(int arreglo[], int n, int i)
+{
+	// Encuentra el más grande entre la raíz, el hijo izquierdo y el hijo derecho
+
+	// Inicializar el mayor como raíz
+	int mas_grande = i;
+
+	int izquierdo = 2 * i + 1;
+
+	int derecha = 2 * i + 2;
+
+	// En caso de que el hijo izquierdo es más grande que la raíz
+	if (izquierdo < n && arreglo[izquierdo] > arreglo[mas_grande])
+
+		mas_grande = izquierdo;
+
+	// Si el hijo derecho es más grande que el más grande
+	if (derecha < n && arreglo[derecha] > arreglo[mas_grande])
+
+		mas_grande = derecha;
+
+	// Intercambiar y continuar acumulando si la raíz no es mas_grande
+	if (mas_grande != i) {
+
+		swap(&arreglo[i], &arreglo[mas_grande]);
+
+		// Acumula recursivamente 
+		acumular(arreglo, n, mas_grande);
+	}
 }
+
+// Función principal para ordenar el montón
+void heapSort(int arreglo[], int n)
+{
+
+	// Construir montón 
+	for (int i = n / 2 - 1; i >= 0; i--)
+
+		acumular(arreglo, n, i);
+
+	// Ordenar montones
+	for (int i = n - 1; i >= 0; i--) {
+
+		swap(&arreglo[0], &arreglo[i]);
+
+		// acumular elemento raíz para obtener el elemento más alto en
+		// enraizar de nuevo
+		acumular(arreglo, i, 0);
+	}
+}
+

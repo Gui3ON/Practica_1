@@ -4,7 +4,7 @@
 n=(1000 2000 3000 4000 5000 8000 10000 50000 100000 150000 200000 300000 400000 500000 600000 700000 800000 900000 1000000 1500000 2000000)
 
 # Nombre del archivo de entrada
-entrada="numeros10millones.txt"
+entrada="10millones.txt"
 
 # Nombre del archivo de salida
 salida="abb.txt"
@@ -16,7 +16,7 @@ gcc abb.c tiempo.c -o abb
 for n in "${n[@]}"
 do
     echo "Ejecutando insercion para $n elementos"
-    ./abb $size < $entrada >> $salida
+    ./abb $n < $entrada >> $salida
 done
 
 echo "Terminado"
