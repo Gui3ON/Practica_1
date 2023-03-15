@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
 	//******************************************************************
 
 	//mandamos a llamar la funcion para imprimir solo para verificar que este el arreglo ordenado
-	imprimirArreglo(arreglo, n);
+	//imprimirArreglo(arreglo, n);
 
 	//Terminar programa normalmente
 	exit(0);
