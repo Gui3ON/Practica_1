@@ -78,7 +78,7 @@ int main (int argc, char* argv[])
             de n que se haya ordenada de forma correcta.
   */
 
- imprimir_Arreglo(arr, n);
+ //imprimir_Arreglo(arr, n);
 	
 	//******************************************************************	
 	//Iniciar el conteo del tiempo para las evaluaciones de rendimiento
@@ -123,7 +123,13 @@ int main (int argc, char* argv[])
 	printf("CPU/Wall   %.10f %% \n",100.0 * (utime1 - utime0 + stime1 - stime0) / (wtime1 - wtime0));
 	printf("\n");
 	//******************************************************************
-
+	
+	/*
+			Liberamos la memoria que creamos dinámicamente para el arreglo donde guardamos los números.
+	*/
+	
+	free(arr);
+	
 	//Terminar programa normalmente	
 	exit (0);	
 }
