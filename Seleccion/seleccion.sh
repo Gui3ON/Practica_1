@@ -16,7 +16,7 @@ gcc seleccion.c tiempo.c -o seleccion
 for n in "${n[@]}"
 do
     echo "Ejecutando insercion para $n elementos"
-    ./seleccion $size < $entrada >> $salida
+    ./seleccion $n < $entrada >> $salida
 done
 
 echo "Terminado"
