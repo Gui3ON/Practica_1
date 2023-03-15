@@ -16,7 +16,7 @@ gcc quick.c tiempo.c -o quick
 for n in "${n[@]}"
 do
     echo "Ejecutando insercion para $n elementos"
-    ./quick $size < $entrada >> $salida
+    ./quick $n < $entrada >> $salida
 done
 
 echo "Terminado"
