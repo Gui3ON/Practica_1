@@ -16,7 +16,7 @@ gcc insercion.c tiempo.c -o insercion
 for n in "${n[@]}"
 do
     echo "Ejecutando insercion para $n elementos"
-    ./insercion $size < $entrada >> $salida
+    ./insercion $n < $entrada >> $salida
 done
 
 echo "Terminado"
