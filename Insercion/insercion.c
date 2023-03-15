@@ -58,7 +58,7 @@ int main (int argc, char* argv[])
 	//Lamado a la función llenarArreglo, a la cual se pasa por referencia el arreglo y por valor la n
 	  llenarArreglo(arreglo, n);
 	//Mostrar el arreglo por pantalla, para verificar que se lleno correctamente
-	  mostrarArreglo(arreglo, n);
+        //mostrarArreglo(arreglo, n);
 
 	//******************************************************************	
 	//Iniciar el conteo del tiempo para las evaluaciones de rendimiento
@@ -112,7 +112,7 @@ int main (int argc, char* argv[])
 	//mandamos a llamar la funcion para imprimir solo para verificar que este el arreglo ordenado
 	//imprimirArreglo(arreglo, n); 
 	//Terminar programa normalmente	
-	  mostrarArreglo(arreglo, n);
+	//mostrarArreglo(arreglo, n);
 	  exit (0);	
 }
 
