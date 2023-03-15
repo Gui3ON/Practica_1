@@ -16,7 +16,7 @@ gcc abb.c tiempo.c -o abb
 for n in "${n[@]}"
 do
     echo "Ejecutando insercion para $n elementos"
-    ./abb $size < $entrada >> $salida
+    ./abb $n < $entrada >> $salida
 done
 
 echo "Terminado"
