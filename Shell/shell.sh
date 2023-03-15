@@ -1,26 +1,23 @@
 #!/bin/bash
 
+# Array de tamaños de entrada
+n=(1000 2000 3000 4000 5000 8000 10000 50000 100000 150000 200000 300000 400000 500000 600000 700000 800000 900000 1000000 1500000 2000000)
+
+# Nombre del archivo de entrada
+entrada="numeros10millones.txt"
+
+# Nombre del archivo de salida
+salida="shell.txt"
+
+# Compilar el código fuente
 gcc shell.c tiempo.c -o shell
-./shell 100 < numeros10millones.txt >> shell.txt
-./shell 1000 < numeros10millones.txt >> shell.txt
-# ./shell 5000 < numeros10millones.txt >> shell.txt
-# ./shell 10000 < numeros10millones.txt >> shell.txt
-# ./shell 50000 < numeros10millones.txt >> shell.txt
-# ./shell 100000 < numeros10millones.txt >> shell.txt
-# ./shell 200000 < numeros10millones.txt >> shell.txt
-# ./shell 400000 < numeros10millones.txt >> shell.txt
-# ./shell 600000 < numeros10millones.txt >> shell.txt
-# ./shell 800000 < numeros10millones.txt >> shell.txt
-# ./shell 1000000 < numeros10millones.txt >> shell.txt
-# ./shell 2000000 < numeros10millones.txt >> shell.txt
-# ./shell 3000000 < numeros10millones.txt >> shell.txt
-# ./shell 4000000 < numeros10millones.txt >> shell.txt
-# ./shell 5000000 < numeros10millones.txt >> shell.txt
-# ./shell 6000000 < numeros10millones.txt >> shell.txt
-# ./shell 7000000 < numeros10millones.txt >> shell.txt
-# ./shell 8000000 < numeros10millones.txt >> shell.txt
-# ./shell 9000000 < numeros10millones.txt >> shell.txt
-# ./shell 10000000 < numeros10millones.txt >> shell.txt
 
+# Ejecutar el programa para cada tamaño de entrada
+for n in "${n[@]}"
+do
+    echo "Ejecutando insercion para $n elementos"
+    ./shell $n < $entrada >> $salida
+done
 
-exit
+echo "Terminado"
+exit 0

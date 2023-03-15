@@ -5,7 +5,7 @@
     de búsqueda para hacer la medición de tiempos con distinta cantidad 
     de numeros a ordenar.
 	
-    Fecha: 23/03/2023
+    Fecha: 13/03/2023
 	Version: 1.0
 	Autores:
 			-Ojeda Navarro Guillermo

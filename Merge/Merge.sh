@@ -16,7 +16,7 @@ gcc Merge.c tiempo.c -o Merge
 for n in "${n[@]}"
 do
     echo "Ejecutando insercion para $n elementos"
-    ./Merge $size < $entrada >> $salida
+    ./Merge $n < $entrada >> $salida
 done
 
 echo "Terminado"
